@@ -34,7 +34,7 @@ for i in range(len(tle_lines)):
     elif line[0] not in ["1", "2"]:
         satellite_name = line.strip()
 
-    if (satellite_name and satellite_name.startswith(args.satellite)) or not args.satellite:
+    if (satellite_name and satellite_name == args.satellite) or not args.satellite:
         tle = tle_lines[i+1] + tle_lines[i+2]
         break
 
