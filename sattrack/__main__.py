@@ -10,11 +10,11 @@ from sattrack.coordinates import *
 parser = argparse.ArgumentParser("sattracker")
 parser.add_argument("tle", help="The TLE file to use")
 parser.add_argument("coords", help="The coordinates (lat, lon, alt) of the observer")
-parser.add_argument("--duration", help="Days into the future to predict passes", type=int, default=14)
-parser.add_argument("--step", help="The step for calculation of the orbit in seconds", type=int, default=30)
-parser.add_argument("--elevation", help="Only display passes with the elevation higher than this value", type=float,
-                    default=5.0)
-parser.add_argument("--satellite", help="If there are multiple satellites, use the first one named", default="")
+parser.add_argument("-d", "--duration", help="Days into the future to predict passes", type=int, default=14)
+parser.add_argument("-s", "--step", help="The step for calculation of the orbit in seconds", type=int, default=30)
+parser.add_argument("-e", "--elevation", help="Only display passes with the elevation higher than this value",
+                    type=float, default=5.0)
+parser.add_argument("-n", "--satellite", help="If there are multiple satellites, use the first one named", default="")
 
 args = parser.parse_args()
 lat, lon, alt = args.coords.split(",")
