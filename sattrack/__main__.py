@@ -60,7 +60,6 @@ jd = jd_now()
 local = tz.tzlocal()
 seconds_since_epoch = (jd - orbital_elements.get_epoch_jd()) * DAY
 
-print(orbital_elements.get_epoch_jd())
 current_pass = False
 max_el = 0
 for i in range(0, int(DAY * args.duration / args.step)):
