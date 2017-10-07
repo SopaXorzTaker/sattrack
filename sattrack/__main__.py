@@ -30,7 +30,7 @@ satellite_name = None
 for i in range(len(tle_lines)):
     line = tle_lines[i]
     if line.startswith("0 "):
-        satellite_name = tle_lines[0][2:].strip()
+        satellite_name = line[2:].strip()
     elif line[0] not in ["1", "2"]:
         satellite_name = line.strip()
 
