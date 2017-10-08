@@ -64,12 +64,16 @@ current_pass = False
 max_el = 0
 for i in range(0, int(DAY * args.duration / args.step)):
     theta = jd_theta(jd)
-    eci = satellite.propagate_to_jd(jd)
+    timestamp = jd_to_date(jd).astimezone(local).strftime("%Y-%m-%d %H:%M:%S")
+    try:
+        eci = satellite.propagate_to_jd(jd)
+    except SatelliteDecay:
+        print("The satellite decayed at %s" % timestamp)
+
     ecef = eci_to_ecef(eci, theta)
     topo = eci_to_topo(eci, (lat, lon, alt), theta)
     lla = ecef_to_lla(ecef)
     az, el, rg = topo
-    timestamp = jd_to_date(jd).astimezone(local).strftime("%Y-%m-%d %H:%M:%S")
     if el > args.elevation:
         if not current_pass:
             print("Pass at %s" % timestamp)

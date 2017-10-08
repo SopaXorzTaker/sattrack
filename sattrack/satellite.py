@@ -62,14 +62,12 @@ class Satellite(object):
         cos_arg, sin_arg = math.cos(argument_of_perigee + true_anomaly), math.sin(argument_of_perigee + true_anomaly)
         cos_inc, sin_inc = math.cos(self.orbital_elements.inclination), math.sin(self.orbital_elements.inclination)
 
-        """
-            radius * (cos_asc * cos_arg_tru - sin_asc * sin_arg_tru * cos_inc),
-            radius * (sin_asc * cos_arg_tru + cos_asc * sin_arg_tru * cos_inc),
-            radius * (sin_inc * sin_arg_tru),
-        """
         x = radius*(cos_asc * cos_arg - sin_asc * sin_arg * cos_inc)
         y = radius*(sin_asc * cos_arg + cos_asc * sin_arg * cos_inc)
         z = radius*(sin_arg * sin_inc)
+
+        if radius < MIN_ORBIT_ALTITUDE:
+            raise SatelliteDecay("The satellite has decayed from orbit")
 
         return x, y, z
 
@@ -81,3 +79,7 @@ class Satellite(object):
         """
 
         return self.propagate((jd - self.orbital_elements.get_epoch_jd()) * DAY)
+
+
+class SatelliteDecay(Exception):
+    pass
