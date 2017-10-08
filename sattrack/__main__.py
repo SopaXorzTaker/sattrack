@@ -77,6 +77,7 @@ for i in range(0, int(DAY * args.duration / args.step)):
         eci = satellite.propagate_to_jd(jd)
     except SatelliteDecay:
         print("The satellite decayed at %s" % timestamp)
+        break
 
     ecef = eci_to_ecef(eci, theta)
 
