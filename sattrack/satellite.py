@@ -66,7 +66,7 @@ class Satellite(object):
         y = radius*(sin_asc * cos_arg + cos_asc * sin_arg * cos_inc)
         z = radius*(sin_arg * sin_inc)
 
-        if radius < MIN_ORBIT_ALTITUDE:
+        if (radius - EARTH_RADIUS) < MIN_ORBIT_ALTITUDE:
             raise SatelliteDecay("The satellite has decayed from orbit")
 
         return x, y, z
